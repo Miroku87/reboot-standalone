@@ -7,42 +7,49 @@
 </head>
 <body>
 <div id="panel">
-    <div class="column">
-        <div class="button">
-            <div class="icon"></div>
-            <div class="text">Turboascensori palazzi residenziali</div>
-        </div>
-        <div class="button">
-            <div class="icon"></div>
-            <div class="text">Griglia di intercomunicazione ad ampio raggio</div>
-        </div>
-        <div class="button">
-            <div class="icon"></div>
-            <div class="text">Sistema di illuminazione stradale d’emergenza</div>
-        </div>
-        <div class="button">
-            <div class="icon"></div>
-            <div class="text">Alimentazione Impianto idrico</div>
-        </div>
-        <div class="button">
-            <div class="icon"></div>
-            <div class="text">Sistema difensivo automatico – Sezione Nord</div>
-        </div>
-        <div class="button">
-            <div class="icon"></div>
-            <div class="text">Accesso alla rete locale Ravnet</div>
-        </div>
-        <div class="button">
-            <div class="icon"></div>
-            <div class="text">Sistema direzionale Synapse</div>
-        </div>
-        <div class="button">
-            <div class="icon"></div>
-            <div class="text">Impianto controllo Proxy</div>
+    <div id="energy_label">
+        % NRG:
+    </div>
+    <div id="energy_bar">
+        <div class="bar">
+            <div class="stripes"></div>
         </div>
     </div>
+    <div class="column">
+        <div class="buttons-container off">
+            <div class="button on">
+                <div class="icon"><img src="images/on.png" border="0"/></div>
+                <div class="text"></div>
+            </div>
+            <div class="button idle">
+                <div class="icon"><img src="images/idle.png" border="0"/></div>
+                <div class="text"></div>
+            </div>
+            <div class="button off">
+                <div class="icon"><img src="images/off.png" border="0"/></div>
+                <div class="text"></div>
+            </div>
+        </div>
+    </div>
+    <div class="bg_sotto"></div>
 </div>
+<div id="admin_background">
+    <div id="admin_panel">
+        <div id="admin_close">X Chiudi</div>
+        <h2>Pannello di Amministrazione</h2>
+        <h4>Se non sei staff chiudi immediatamente!!!</h4>
+        <table cellpadding="5" cellspacing="0" width="100%">
+            <tr>
+                <td>Percentuale Energia Attuale:</td>
+                <td><input type="number" id="energy_percentage" min="0" max="100" value=""/> <button id="set_energy">Imposta Nuovo Valore</button></td>
+            </tr>
+        </table>
+        <button id="reset_all">Resetta Tutto (perderai tutti i dati raccolti)</button>
+    </div>
+</div>
+<script type="text/javascript" language="JavaScript" src="config.js"></script>
 <script type="text/javascript" language="JavaScript" src="scripts/jquery.min.js"></script>
+<script type="text/javascript" language="JavaScript" src="scripts/Utils.js"></script>
 <script type="text/javascript" language="JavaScript" src="scripts/manager.js"></script>
 </body>
 </html>
