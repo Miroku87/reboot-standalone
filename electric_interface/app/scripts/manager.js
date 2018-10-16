@@ -153,6 +153,7 @@ var Manager = Manager || function ()
                         epidle_str = button.can_switch_off ? " [" + epidle + "%]" : "",
                         epon_str   = " [" + ( button.state_percentage_offset.on >= 0 ? "+" + button.state_percentage_offset.on : button.state_percentage_offset.on + "" ) + "%]";
 
+                    template.removeClass("off");
                     template.find(".on .text").text(button.text + epidle_str);
                     template.find(".idle .text").text(button.text + epon_str);
                     template.find(".off .text").text(button.text);
@@ -166,11 +167,13 @@ var Manager = Manager || function ()
                     this.panel.find(".column").first().append(template);
 
                     if (!this.log.buttons_state_history[i])
-                        this.log.buttons_state_history.push([{time : new Date().getTime(), state : "off"}]);
+                    {
+                        this.log.buttons_state_history.push([{time : new Date().getTime(), state : button.init_state}]);
+                        template.addClass(button.init_state);
+                    }
                     else
                     {
                         var last_state = this.log.buttons_state_history[i].length - 1;
-                        template.removeClass("off");
                         template.addClass(this.log.buttons_state_history[i][last_state].state);
                     }
 
