@@ -67,6 +67,16 @@ window.CONFIG = {
             init_state: "off"
         },
         {
+            text: "Reticolo elettrificato",
+            state_percentage_offset: {
+                on: 0,
+                idle: 0,
+                off: 0
+            },
+            can_switch_off : false,
+            init_state: "offline"
+        },
+        {
             text: "Sistema direzionale Synapse",
             state_percentage_offset: {
                 on: -5,
@@ -85,16 +95,6 @@ window.CONFIG = {
             },
             can_switch_off : true,
             init_state: "off"
-        },
-        {
-            text: "Reticolo elettrificato",
-            state_percentage_offset: {
-                on: 0,
-                idle: 0,
-                off: 0
-            },
-            can_switch_off : false,
-            init_state: "offline"
         }
     ]
 };
