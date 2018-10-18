@@ -15,7 +15,7 @@ var Manager = Manager || function ()
                 SHIFT : 16,
                 A     : 65
             },
-            BUTTON_OFFSET_Y   = ["13.5%", "22.3%", "29.3%", "35.3%", "42.3%", "49.3%", "56.3%", "64.3%"],
+            BUTTON_OFFSET_Y   = ["13.5%", "22.3%", "29.3%", "35.3%", "42.3%", "49.3%", "56.3%", "64.3%", "76%"],
             COOKIE_LOG_NAME   = "energy_log",
             INIT_LOG          = {
                 players_energy_percentage : [0],
@@ -116,6 +116,8 @@ var Manager = Manager || function ()
             changeState : function changeState(b, i, button, current_state, new_state, add_points)
             {
                 add_points = typeof add_points === "undefined" ? true : add_points;
+                current_state = typeof current_state === "undefined" || current_state === null ? b[0].className.replace("buttons-container ","") : current_state;
+
                 b.removeClass(current_state);
                 b.addClass(new_state);
 
@@ -138,7 +140,7 @@ var Manager = Manager || function ()
                     this.changeState(t, i, button, "idle", "on");
                 else if (t.hasClass("on") && button.can_switch_off)
                     this.changeState(t, i, button, "on", "idle");
-                else if (t.hasClass("off"))
+                else
                     return false;
             },
 
@@ -157,6 +159,7 @@ var Manager = Manager || function ()
                     template.find(".on .text").text(button.text + epidle_str);
                     template.find(".idle .text").text(button.text + epon_str);
                     template.find(".off .text").text(button.text);
+                    template.find(".offline .text").text(button.text);
                     template.css({
                         top : BUTTON_OFFSET_Y[i],
                         "animation-delay": (Math.random()*10).toFixed(3)+"s",
@@ -214,6 +217,7 @@ var Manager = Manager || function ()
                                              "<option value='on' "+(current_state === "on" ? "selected" : "")+">Acceso</option>" +
                                              "<option value='idle' "+(current_state === "idle" ? "selected" : "")+">Sbloccato</option>" +
                                              "<option value='off' "+(current_state === "off" ? "selected" : "")+">Bloccato</option>" +
+                                             "<option value='offline' "+(current_state === "offline" ? "selected" : "")+">Offline</option>" +
                                          "</select><br>" +
                                          "Pulsante acceso da: "+on_time+"<br>" +
                                          "<button id='reset_time_"+i+"'>Resetta Pulsante</button></td>"),
@@ -241,6 +245,24 @@ var Manager = Manager || function ()
             {
                 if( this.keys && this.keys[e.which] )
                     delete this.keys[e.which];
+            },
+
+            checkOfflineTimer : function checkOfflineTimer()
+            {
+                for( var b in window.CONFIG.buttons )
+                {
+                    var i = parseInt(b,10),
+                        button = window.CONFIG.buttons[i],
+                        button_elem   = $(".buttons-container").eq( i + 1 );
+
+                    if( button.offline_after_time && this.getStateTime(i,"on") >= button.offline_after_time * 1000 )
+                        this.changeState( button_elem, i, button, null, "offline" );
+                }
+            },
+
+            checkTimers : function checkTimers()
+            {
+                setInterval( this.checkOfflineTimer.bind(this), 60000 );
             },
 
             setListeners : function setListeners()
@@ -279,10 +301,11 @@ var Manager = Manager || function ()
             init : function init()
             {
                 this.getDOMElements();
+                this.resizePanel();
                 this.getCookieLog();
                 this.generateButtons();
                 this.setListeners();
-                this.resizePanel();
+                this.checkTimers();
             }
         };
     }();

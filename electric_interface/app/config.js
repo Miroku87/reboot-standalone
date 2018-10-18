@@ -87,7 +87,7 @@ window.CONFIG = {
             init_state: "off"
         },
         {
-            text: "Pulsante offine",
+            text: "Reticolo elettrificato",
             state_percentage_offset: {
                 on: 0,
                 idle: 0,

@@ -141,6 +141,12 @@ body {
     background-color: rgba(255, 0, 0, 0.2);
 }
 
+#panel .button.offline {
+    color: grey;
+    border-color: darkgrey;
+    background-color: rgba(169, 169, 169, 0.2);
+}
+
 #panel .button > .icon {
     float: left;
     margin-right: 5px;
@@ -166,6 +172,11 @@ body {
     clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
 }
 
+#panel .buttons-container.off > .button.offline {
+    opacity: 1;
+    clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+}
+
 #panel .buttons-container.idle > .button.on {
     opacity: 0;
     clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
@@ -178,6 +189,11 @@ body {
 
 #panel .buttons-container.idle > .button.off {
     opacity: 0;
+    clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+}
+
+#panel .buttons-container.idle > .button.offline {
+    opacity: 1;
     clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
 }
 
@@ -194,6 +210,31 @@ body {
 #panel .buttons-container.on > .button.off {
     opacity: 0;
     clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+}
+
+#panel .buttons-container.on > .button.offline {
+    opacity: 1;
+    clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+}
+
+#panel .buttons-container.offline > .button.on {
+    opacity: 1;
+    clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+}
+
+#panel .buttons-container.offline > .button.idle {
+    opacity: 0;
+    clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+}
+
+#panel .buttons-container.offline > .button.off {
+    opacity: 0;
+    clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+}
+
+#panel .buttons-container.offline > .button.offline {
+    opacity: 1;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
 }
 
 #admin_background {
