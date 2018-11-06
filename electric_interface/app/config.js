@@ -12,7 +12,8 @@ window.CONFIG = {
                 idle: 10,
                 off: 0
             },
-            can_switch_off : true
+            can_switch_off : true,
+            init_state: "off"
         },
         {
             text: "Griglia di intercomunicazione ad ampio raggio",
@@ -21,7 +22,8 @@ window.CONFIG = {
                 idle: 0,
                 off: 0
             },
-            can_switch_off : false
+            can_switch_off : false,
+            init_state: "off"
         },
         {
             text: "Sistema di illuminazione stradale d’emergenza",
@@ -30,7 +32,8 @@ window.CONFIG = {
                 idle: 5,
                 off: 0
             },
-            can_switch_off : true
+            can_switch_off : true,
+            init_state: "off"
         },
         {
             text: "Alimentazione Impianto idrico",
@@ -39,7 +42,8 @@ window.CONFIG = {
                 idle: 0,
                 off: 0
             },
-            can_switch_off : false
+            can_switch_off : false,
+            init_state: "off"
         },
         {
             text: "Sistema difensivo automatico – Sezione Nord",
@@ -49,7 +53,8 @@ window.CONFIG = {
                 off: 0
             },
             can_switch_off : false,
-            switch_off_after_time: 36000 //secondi
+            offline_after_time: 36000, //secondi
+            init_state: "off"
         },
         {
             text: "Accesso alla rete locale Ravnet",
@@ -58,7 +63,18 @@ window.CONFIG = {
                 idle: 0,
                 off: 0
             },
-            can_switch_off : false
+            can_switch_off : false,
+            init_state: "off"
+        },
+        {
+            text: "Reticolo elettrificato",
+            state_percentage_offset: {
+                on: 0,
+                idle: 0,
+                off: 0
+            },
+            can_switch_off : false,
+            init_state: "offline"
         },
         {
             text: "Sistema direzionale Synapse",
@@ -67,7 +83,8 @@ window.CONFIG = {
                 idle: 0,
                 off: 0
             },
-            can_switch_off : false
+            can_switch_off : false,
+            init_state: "off"
         },
         {
             text: "Impianto controllo Proxy",
@@ -76,7 +93,8 @@ window.CONFIG = {
                 idle: 10,
                 off: 0
             },
-            can_switch_off : true
+            can_switch_off : true,
+            init_state: "off"
         }
     ]
 };
