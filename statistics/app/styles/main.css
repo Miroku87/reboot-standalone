@@ -5,3 +5,9 @@
 	width: 800px;
 	height: 400px;
 }
+
+#military_abilities_bars,
+#civilian_abilities_bars
+{
+	width: 1000px;
+}

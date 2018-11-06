@@ -2,32 +2,61 @@
  * Created by Miroku on 11/10/2018.
  */
 
-var Manager = Manager || function () {
+var Manager = Manager || function ()
+{
     return {
         
         disegnaStatisticheClassi: function disegnaStatisticheClassi( data )
         {
             var data            = data.data,
-                military_data   = data.filter( function(el){ return el.tipo_classe === "militare"; }),
-                military_labels = military_data.map( function(el){ return el.nome_classe; }),
-                military_colors = military_data.map( function(el){ return Utils.dynamicColor(); }),
-                military_data   = military_data.map( function(el){ return parseInt( el.QTY, 10 ); }),
-                civilian_data   = data.filter( function(el){ return el.tipo_classe === "civile"; }),
-                civilian_labels = civilian_data.map( function(el){ return el.nome_classe; }),
-                civilian_colors = civilian_data.map( function(el){ return Utils.dynamicColor(); }),
-                civilian_data   = civilian_data.map( function(el){ return parseInt( el.QTY, 10 ); });
+                military_data   = data.filter( function ( el )
+                {
+                    return el.tipo_classe === "militare";
+                } ),
+                military_labels = military_data.map( function ( el )
+                {
+                    return el.nome_classe;
+                } ),
+                military_colors = military_data.map( function ( el )
+                {
+                    return Utils.dynamicColor();
+                } ),
+                military_data   = military_data.map( function ( el )
+                {
+                    return parseInt( el.QTY, 10 );
+                } ),
+                civilian_data   = data.filter( function ( el )
+                {
+                    return el.tipo_classe === "civile";
+                } ),
+                civilian_labels = civilian_data.map( function ( el )
+                {
+                    return el.nome_classe;
+                } ),
+                civilian_colors = civilian_data.map( function ( el )
+                {
+                    return Utils.dynamicColor();
+                } ),
+                civilian_data   = civilian_data.map( function ( el )
+                {
+                    return parseInt( el.QTY, 10 );
+                } );
             
             this.military_classes_pie = new Chart( this.military_classes_pie_ctx, {
                 type   : 'pie',
-                data   : { datasets: [ { data: military_data, backgroundColor: military_colors } ], labels: military_labels },
+                data   : {
+                    datasets: [ { data: military_data, backgroundColor: military_colors } ],
+                    labels  : military_labels
+                },
                 options: { responsive: false }
             } );
             
-            console.log(civilian_data,civilian_labels);
-            
             this.civilian_classes_pie = new Chart( this.civilian_classes_pie_ctx, {
                 type   : 'pie',
-                data   : { datasets: [ { data: civilian_data, backgroundColor: civilian_colors } ], labels: civilian_labels },
+                data   : {
+                    datasets: [ { data: civilian_data, backgroundColor: civilian_colors } ],
+                    labels  : civilian_labels
+                },
                 options: { responsive: false }
             } );
         },
@@ -43,8 +72,79 @@ var Manager = Manager || function () {
             );
         },
         
-        disegnaStatisticheAbilita: function disegnaStatisticheAbilita()
+        disegnaStatisticheAbilita: function disegnaStatisticheAbilita( data )
         {
+            var data            = data.data,
+                military_data   = data.filter( function ( el )
+                {
+                    return el.tipo_abilita === "militare";
+                } ),
+                military_labels = military_data.map( function ( el )
+                {
+                    return el.nome_abilita;
+                } ),
+                military_colors = military_data.map( function ( el )
+                {
+                    return Utils.dynamicColor();
+                } ),
+                military_data   = military_data.map( function ( el )
+                {
+                    return { y: parseInt( el.QTY, 10 ), x: el.nome_abilita };
+                } ),
+                civilian_data   = data.filter( function ( el )
+                {
+                    return el.tipo_abilita === "civile";
+                } ),
+                civilian_labels = civilian_data.map( function ( el )
+                {
+                    return el.nome_abilita;
+                } ),
+                civilian_colors = civilian_data.map( function ( el )
+                {
+                    return Utils.dynamicColor();
+                } ),
+                civilian_data   = civilian_data.map( function ( el )
+                {
+                    return { y: parseInt( el.QTY, 10 ), x: el.nome_abilita };
+                } );
+            
+            this.military_abilities_bars = new Chart( this.military_abilities_bars_ctx, {
+                type   : 'bar',
+                data   : {
+                    datasets: [ { data: military_data, label: "Quantità di PG con l'abilità", backgroundColor: Utils.dynamicColor() } ],
+                    labels: military_labels
+                },
+                options: {
+                    responsive: true,
+                    scaleShowValues: true,
+                    scales: {
+                        xAxes: [{
+                            ticks: {
+                                autoSkip: false
+                            }
+                        }]
+                    }
+                }
+            } );
+            
+            this.civilian_abilities_bars = new Chart( this.civilian_abilities_bars_ctx, {
+                type   : 'bar',
+                data   : {
+                    datasets: [ { data: civilian_data, label: "Quantità di PG con l'abilità", backgroundColor: Utils.dynamicColor() } ],
+                    labels: civilian_labels
+                },
+                options: {
+                    responsive: true,
+                    scaleShowValues: true,
+                    scales: {
+                        xAxes: [{
+                            ticks: {
+                                autoSkip: false
+                            }
+                        }]
+                    }
+                }
+            } );
         },
         
         recuperaStatisticheAbilita: function recuperaStatisticheAbilita()
@@ -62,7 +162,8 @@ var Manager = Manager || function () {
         {
         },
         
-        recuperaStatisticheCrediti: function recuperaStatisticheCrediti() {
+        recuperaStatisticheCrediti: function recuperaStatisticheCrediti()
+        {
             Utils.requestData(
                 "http://api.rebootgrv.com/api.php/statistics/recuperastatistichecrediti",
                 "GET",
@@ -87,9 +188,9 @@ var Manager = Manager || function () {
             );
         },
         
-        disegnaStatistichePunteggi: function disegnaStatistichePunteggi() {
+        disegnaStatistichePunteggi: function disegnaStatistichePunteggi()
+        {
         },
-        
         
         recuperaStatistichePunteggi: function recuperaStatistichePunteggi()
         {
@@ -132,7 +233,8 @@ var Manager = Manager || function () {
             );
         },
         
-        loadCharts: function loadCharts() {
+        loadCharts: function loadCharts()
+        {
             this.recuperaStatisticheClassi();
             this.recuperaStatisticheAbilita();
             this.recuperaStatisticheCrediti();
@@ -142,7 +244,8 @@ var Manager = Manager || function () {
             this.recuperaStatisticheAcquistiRavShop();
         },
         
-        doLogin: function doLogin() {
+        doLogin: function doLogin()
+        {
             Utils.requestData(
                 "http://api.rebootgrv.com/api.php/usersmanager/login/",
                 "POST",
@@ -155,27 +258,29 @@ var Manager = Manager || function () {
             );
         },
         
-        getDOMElements: function getDOMElements() {
-            this.military_classes_pie_ctx    = $( "#military_classes_pie" )[0].getContext("2d");
-            this.military_abilities_bars_ctx = $( "#military_abilities_bars" )[0].getContext("2d");
-            this.civilian_classes_pie_ctx    = $( "#civilian_classes_pie" )[0].getContext("2d");
-            this.civilian_abilities_pie_ctx  = $( "#civilian_abilities_pie" )[0].getContext("2d");
-            this.credits_line_ctx            = $( "#credits_line" )[0].getContext("2d");
-            this.pf_pie_ctx                  = $( "#pf_pie" )[0].getContext("2d");
-            this.ps_pie_ctx                  = $( "#ps_pie" )[0].getContext("2d");
-            this.mente_pie_ctx               = $( "#mente_pie" )[0].getContext("2d");
-            this.pm_pie_ctx                  = $( "#pm_pie" )[0].getContext("2d");
-            this.pc_tot_pie_ctx              = $( "#pc_tot_pie" )[0].getContext("2d");
-            this.px_tot_pie_ctx              = $( "#px_tot_pie" )[0].getContext("2d");
-            this.pc_spent_pie_ctx            = $( "#pc_spent_pie" )[0].getContext("2d");
-            this.px_spent_pie_ctx            = $( "#px_spent_pie" )[0].getContext("2d");
-            this.pc_free_pie_ctx             = $( "#pc_free_pie" )[0].getContext("2d");
-            this.px_free_pie_ctx             = $( "#px_free_pie" )[0].getContext("2d");
-            this.ravshop_qty_bar_ctx         = $( "#ravshop_qty_bar" )[0].getContext("2d");
-            this.ravshop_popularity_bar_ctx  = $( "#ravshop_popularity_bar" )[0].getContext("2d");
+        getDOMElements: function getDOMElements()
+        {
+            this.military_classes_pie_ctx    = $( "#military_classes_pie" )[ 0 ].getContext( "2d" );
+            this.military_abilities_bars_ctx = $( "#military_abilities_bars" )[ 0 ].getContext( "2d" );
+            this.civilian_classes_pie_ctx    = $( "#civilian_classes_pie" )[ 0 ].getContext( "2d" );
+            this.civilian_abilities_bars_ctx = $( "#civilian_abilities_bars" )[ 0 ].getContext( "2d" );
+            this.credits_line_ctx            = $( "#credits_line" )[ 0 ].getContext( "2d" );
+            this.pf_pie_ctx                  = $( "#pf_pie" )[ 0 ].getContext( "2d" );
+            this.ps_pie_ctx                  = $( "#ps_pie" )[ 0 ].getContext( "2d" );
+            this.mente_pie_ctx               = $( "#mente_pie" )[ 0 ].getContext( "2d" );
+            this.pm_pie_ctx                  = $( "#pm_pie" )[ 0 ].getContext( "2d" );
+            this.pc_tot_pie_ctx              = $( "#pc_tot_pie" )[ 0 ].getContext( "2d" );
+            this.px_tot_pie_ctx              = $( "#px_tot_pie" )[ 0 ].getContext( "2d" );
+            this.pc_spent_pie_ctx            = $( "#pc_spent_pie" )[ 0 ].getContext( "2d" );
+            this.px_spent_pie_ctx            = $( "#px_spent_pie" )[ 0 ].getContext( "2d" );
+            this.pc_free_pie_ctx             = $( "#pc_free_pie" )[ 0 ].getContext( "2d" );
+            this.px_free_pie_ctx             = $( "#px_free_pie" )[ 0 ].getContext( "2d" );
+            this.ravshop_qty_bar_ctx         = $( "#ravshop_qty_bar" )[ 0 ].getContext( "2d" );
+            this.ravshop_popularity_bar_ctx  = $( "#ravshop_popularity_bar" )[ 0 ].getContext( "2d" );
         },
         
-        init: function init() {
+        init: function init()
+        {
             this.getDOMElements();
             this.doLogin();
         }
