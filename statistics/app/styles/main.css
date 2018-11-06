@@ -1,0 +1,7 @@
+.pie-chart,
+.bar-chart,
+.line-chart
+{
+	width: 800px;
+	height: 400px;
+}
