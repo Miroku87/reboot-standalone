@@ -61,8 +61,8 @@ var Manager = Manager || function ()
 
                 this.keys[e.which] = true;
 
-                if (this.keys[KEYS.CTRL] && this.keys[KEYS.SHIFT] && this.keys[KEYS.A])
-                    this.openAdminPanel();
+                //if (this.keys[KEYS.CTRL] && this.keys[KEYS.SHIFT] && this.keys[KEYS.A])
+                //    this.openAdminPanel();
             },
 
             onKeyUp : function onKeyUp(e)
